@@ -1,0 +1,32 @@
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# === Environnement virtuel ===
+.venv/
+env/
+venv/
+
+# === Fichiers de test générés ===
+output/
+
+# === VS Code ===
+.vscode/
+
+# === JetBrains (Rider, PyCharm...) ===
+.idea/
+
+# === Fichiers modèles Ollama (au cas où) ===
+ollama_models/
+.ollama/
+
+# === Fichiers secrets (à créer si besoin) ===
+.env
+.env.*
+
+# === Système ===
+.DS_Store
+Thumbs.db
