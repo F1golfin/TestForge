@@ -13,17 +13,23 @@ edge_case_agent = Agent(
     allow_delegation=False
 )
 
-# Fonction appelée depuis main.py ou une autre étape
-def run_edge_case_generation(signature: str) -> str:
+def run_edge_case_generation(signature: str, feedback: str = "") -> str:
     prompt = f"""
-Voici une signature de méthode C# :
+Tu es un générateur de cas de test pour une méthode C#.
+
+Signature :
 {signature}
 
-Propose des cas de test à utiliser avec cette méthode, dans deux catégories :
-1. Cas normaux
-2. Cas limites ou exceptionnels
+Ta mission :
+- Générer des cas normaux et des cas limites/extrêmes
+- Ne proposer que des appels à la méthode, pas de texte explicatif
+- Si un retour de review est fourni, prends-en compte pour améliorer ou corriger les cas
 
-Présente les résultats au format :
+{"Voici un retour d'un reviewer à prendre en compte :" if feedback else ""}
+{feedback}
+
+Format attendu :
+
 Cas normaux :
 - Méthode(...)
 

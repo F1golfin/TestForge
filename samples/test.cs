@@ -1,29 +1,63 @@
 using System;
+using System.Collections.Generic;
 
-namespace MathUtilities
+namespace GameNamespace
 {
-    public static class MathFunctions
+    public enum CharacterClass
     {
-        public static int Add(int a, int b)
+        Warrior,
+        Mage,
+        Rogue
+    }
+
+    public class GameCharacter
+    {
+        public string Name { get; private set; }
+        public CharacterClass Class { get; private set; }
+        public int Level { get; private set; }
+        public int Health { get; private set; }
+        public List<string> Inventory { get; private set; }
+
+        public GameCharacter(string name, CharacterClass charClass)
         {
-            return a + b;
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Name cannot be empty");
+
+            Name = name;
+            Class = charClass;
+            Level = 1;
+            Health = 100;
+            Inventory = new List<string>();
         }
 
-        public static int Subtract(int a, int b)
+        public void TakeDamage(int damage)
         {
-            return a - b;
+            if (damage < 0) throw new ArgumentException("Damage must be positive");
+            Health = Math.Max(0, Health - damage);
         }
 
-        public static int Multiply(int a, int b)
+        public void Heal(int healAmount)
         {
-            return a * b;
+            if (healAmount < 0) throw new ArgumentException("Heal amount must be positive");
+            Health = Math.Min(100, Health + healAmount);
         }
 
-        public static double Divide(int a, int b)
+        public void LevelUp()
         {
-            if (b == 0)
-                throw new DivideByZeroException("Denominator cannot be zero.");
-            return (double)a / b;
+            Level++;
+            Health = 100;
+        }
+
+        public void AddItem(string item)
+        {
+            if (string.IsNullOrWhiteSpace(item))
+                throw new ArgumentException("Item cannot be empty");
+            Inventory.Add(item);
+        }
+
+        public bool HasItem(string item)
+        {
+            return Inventory.Contains(item);
         }
     }
 }
