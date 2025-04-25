@@ -1,6 +1,7 @@
 import subprocess
 
 def appeler_ollama(prompt: str, modele: str = "codellama") -> str:
+    """Envoie un prompt au modèle Ollama et retourne la réponse texte."""
     try:
         result = subprocess.run(
             ["ollama", "run", modele],
@@ -9,10 +10,6 @@ def appeler_ollama(prompt: str, modele: str = "codellama") -> str:
             stderr=subprocess.PIPE,
             check=True
         )
-        return result.stdout.decode("utf-8")
+        return result.stdout.decode("utf-8").strip()
     except subprocess.CalledProcessError as e:
-        return f"Erreur : {e.stderr.decode('utf-8')}"
-
-if __name__ == "__main__":
-    prompt = """Voici une méthode C# : public int Add(int a, int b) { return a + b;} Écris un test unitaire NUnit 3 pour cette méthode."""
-    print(appeler_ollama(prompt))
+        return f"❌ Erreur Ollama : {e.stderr.decode('utf-8')}"
