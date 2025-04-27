@@ -1,32 +1,41 @@
-# === Python ===
+# ---- Ignorer les fichiers Python ----
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.sqlite3
+.env
+.venv/
+venv/
+.Python
 *.log
 
-# === Environnement virtuel ===
-.venv/
-env/
-venv/
 
-# === Fichiers de test générés ===
-output/
+# ---- Ignorer les fichiers/tests générés temporairement ----
+logs/
+*.tmp
+*.bak
 
-# === VS Code ===
+# ---- Ignorer les fichiers spécifiques à Visual Studio Code ----
 .vscode/
 
-# === JetBrains (Rider, PyCharm...) ===
-.idea/
+# ---- Ignorer les fichiers spécifiques à Visual Studio / C# ----
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
 
-# === Fichiers modèles Ollama (au cas où) ===
-ollama_models/
-.ollama/
+# ---- Ignorer les fichiers générés par dotnet build/test ----
+TestResults/
+*.nupkg
+*.snupkg
 
-# === Fichiers secrets (à créer si besoin) ===
-.env
-.env.*
+# ---- Ignorer les solutions locales de build ----
+*.swp
+*.sln.cache
 
-# === Système ===
-.DS_Store
-Thumbs.db
+# ---- Rapports de test HTML ----
+test-results.html
+TestResult.xml

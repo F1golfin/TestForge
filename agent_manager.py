@@ -47,17 +47,12 @@ class AgentManager:
             feedback=feedback
         )
 
-    def is_feedback_positive(self, feedback: str) -> bool:
-        lower = feedback.lower()
-        return "Aucun problème technique détecté" in lower
-
     def review_and_improve(self):
         print("\nDébut de la phase de relecture/amélioration...")
-        satisfied = False
         max_iterations = 3
         iteration = 0
 
-        while not satisfied and iteration < max_iterations:
+        while iteration < max_iterations:
             iteration += 1
             print(f"Relecture itérative {iteration}...")
 
@@ -66,12 +61,8 @@ class AgentManager:
 
             print(f"Feedback reçu :\n{feedback}\n")
 
-            if self.is_feedback_positive(feedback):
-                print("Fichier validé par l'IA reviewer.")
-                satisfied = True
-            else:
-                print("Fichier à améliorer...")
-                self.build_test_file(feedback=feedback)
+            print("\nAMELIORATION DU FICHIER DE TEST\n")
+            self.build_test_file(feedback=feedback)
 
     def save_file(self):
         os.makedirs(self.output_path, exist_ok=True)
